@@ -1,0 +1,15 @@
+{% extends 'admin/layout.html' %}
+{% block title %}Контент{% endblock %}
+{% block content %}
+<section class="admin-section">
+  {% for item in pages %}
+  <form class="admin-card stacked-gap" method="post">
+    <input type="hidden" name="page_key" value="{{ item.page_key }}">
+    <h2>{{ item.page_key }}</h2>
+    <label>Заголовок<input type="text" name="title" value="{{ item.title }}" required></label>
+    <label>Текст<textarea name="body" rows="6" required>{{ item.body }}</textarea></label>
+    <button class="primary-btn" type="submit">Сохранить</button>
+  </form>
+  {% endfor %}
+</section>
+{% endblock %}

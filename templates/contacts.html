@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Контакты — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><h1>Контакты</h1></div></section>
+<section class="section">
+  <div class="container contact-grid">
+    <div class="content-card">
+      <h2>Свяжитесь с нами</h2>
+      <p>ООО «Шедлер»</p>
+      <p>Телефон: +7 (900) 123-45-67</p>
+      <p>Email: info@shedler-house.ru</p>
+      <p>Адрес: г. Ярославль, ул. Примерная, 12</p>
+      <iframe class="map" src="https://yandex.ru/map-widget/v1/?um=constructor%3A2ba919b8b4d31e4f6eaeb3a5a37e6794f7ec1df7d7fa53b966ea39bb5ef55eb9&amp;source=constructor"></iframe>
+    </div>
+    <form class="form-card" method="post">
+      <h2>Форма обратной связи</h2>
+      <label>Имя<input type="text" name="name" required></label>
+      <label>Телефон<input type="text" name="phone"></label>
+      <label>Email<input type="email" name="email"></label>
+      <label>Сообщение<textarea name="message" rows="5" required></textarea></label>
+      <button class="primary-btn" type="submit">Отправить сообщение</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

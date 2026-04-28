@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ООО «Шедлер»{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a class="logo" href="{{ url_for('home') }}">Shedler<span>House</span></a>
+    <nav>
+      <a href="{{ url_for('catalog') }}">Каталог</a>
+      <a href="{{ url_for('business') }}">Для бизнеса</a>
+      <a href="{{ url_for('delivery') }}">Доставка</a>
+      <a href="{{ url_for('about') }}">О компании</a>
+      <a href="{{ url_for('contacts') }}">Контакты</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="ghost-btn" href="{{ url_for('favorites') }}">Избранное ({{ favorite_count }})</a>
+      <a class="ghost-btn" href="{{ url_for('compare_page') }}">Сравнение</a>
+      <a class="primary-btn" href="{{ url_for('admin_dashboard') if session.get('admin_id') else url_for('admin_login') }}">{% if session.get('admin_id') %}Админка{% else %}Вход{% endif %}</a>
+    </div>
+  </div>
+</header>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <div class="container flash-stack">
+    {% for category, message in messages %}
+      <div class="flash flash-{{ category }}">{{ message }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+{% endwith %}
+
+<main>
+  {% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo footer-logo">Shedler<span>House</span></div>
+      <p>Интернет-магазин модульных домов для баз отдыха на примере ООО «Шедлер».</p>
+    </div>
+    <div>
+      <h4>Контакты</h4>
+      <p>+7 (900) 123-45-67</p>
+      <p>info@shedler-house.ru</p>
+      <p>г. Ярославль, ул. Примерная, 12</p>
+    </div>
+    <div>
+      <h4>Разделы</h4>
+      <p><a href="{{ url_for('catalog') }}">Каталог домов</a></p>
+      <p><a href="{{ url_for('business') }}">Решения для бизнеса</a></p>
+      <p><a href="{{ url_for('delivery') }}">Доставка и монтаж</a></p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

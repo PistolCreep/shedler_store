@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block title %}{{ page_name }} — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><span class="badge">{{ page_name }}</span><h1>{{ page.title }}</h1></div></section>
+<section class="section"><div class="container"><article class="content-card prose"><p>{{ page.body }}</p></article></div></section>
+{% endblock %}

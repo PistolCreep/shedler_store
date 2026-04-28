@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %}Каталог — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="page-hero small">
+  <div class="container">
+    <span class="badge">Каталог домов</span>
+    <h1>Выберите модульный дом под задачи вашей базы отдыха</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container two-col-layout">
+    <aside class="sidebar-card">
+      <h3>Фильтрация</h3>
+      <form method="get" class="filter-form">
+        <label>Поиск<input type="text" name="search" value="{{ selected.search }}" placeholder="Название или описание"></label>
+        <label>Категория
+          <select name="category">
+            <option value="">Все категории</option>
+            {% for item in nav_categories %}
+              <option value="{{ item.slug }}" {% if selected.category == item.slug %}selected{% endif %}>{{ item.name }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Сезонность
+          <select name="seasonality">
+            <option value="">Любая</option>
+            {% for item in seasonality_options %}
+              <option value="{{ item }}" {% if selected.seasonality == item %}selected{% endif %}>{{ item }}</option>
+            {% endfor %}
+          </select>
+        </label>
+        <label>Сортировка
+          <select name="sort">
+            <option value="popular" {% if selected.sort == 'popular' %}selected{% endif %}>Сначала популярные</option>
+            <option value="price_asc" {% if selected.sort == 'price_asc' %}selected{% endif %}>Цена по возрастанию</option>
+            <option value="price_desc" {% if selected.sort == 'price_desc' %}selected{% endif %}>Цена по убыванию</option>
+            <option value="area_asc" {% if selected.sort == 'area_asc' %}selected{% endif %}>Площадь по возрастанию</option>
+            <option value="area_desc" {% if selected.sort == 'area_desc' %}selected{% endif %}>Площадь по убыванию</option>
+          </select>
+        </label>
+        <button class="primary-btn" type="submit">Применить</button>
+      </form>
+    </aside>
+    <div>
+      <div class="section-head left-only">
+        <div><h2>Найдено моделей: {{ products|length }}</h2></div>
+      </div>
+      <div class="card-grid compact">
+        {% for item in products %}
+        <article class="product-card">
+          <img src="{{ item.image_url }}" alt="{{ item.name }}">
+          <div class="card-body">
+            <span class="category-chip">{{ item.category_name }}</span>
+            <h3>{{ item.name }}</h3>
+            <p>{{ item.short_description }}</p>
+            <div class="product-meta">
+              <span>{{ item.area }} м²</span>
+              <span>{{ item.rooms }} комн.</span>
+              <span>{{ item.capacity }} гостей</span>
+            </div>
+            <div class="product-actions stack-mobile">
+              <strong>{{ format_price(item.price) }} ₽</strong>
+              <div class="inline-actions">
+                <a class="ghost-btn" href="{{ url_for('toggle_favorite', product_id=item.id) }}">♡</a>
+                <a class="ghost-btn" href="{{ url_for('toggle_compare', product_id=item.id) }}">≠</a>
+                <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+              </div>
+            </div>
+          </div>
+        </article>
+        {% else %}
+        <div class="empty-state">По вашему запросу ничего не найдено.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

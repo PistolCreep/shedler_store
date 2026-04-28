@@ -1,0 +1,33 @@
+{% extends 'admin/layout.html' %}
+{% block title %}Категории{% endblock %}
+{% block content %}
+<section class="admin-section split-admin">
+  <form class="admin-card" method="post">
+    <h2>Добавить категорию</h2>
+    <label>Название<input type="text" name="name" required></label>
+    <label>Slug<input type="text" name="slug" required></label>
+    <label>Описание<textarea name="description" rows="5"></textarea></label>
+    <button class="primary-btn" type="submit">Добавить</button>
+  </form>
+  <div class="admin-card">
+    <h2>Список категорий</h2>
+    <div class="table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>ID</th><th>Название</th><th>Slug</th><th></th></tr></thead>
+        <tbody>
+          {% for item in categories %}
+          <tr>
+            <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.slug }}</td>
+            <td>
+              <form method="post" action="{{ url_for('admin_category_delete', category_id=item.id) }}" onsubmit="return confirm('Удалить категорию?')">
+                <button class="danger-btn" type="submit">Удалить</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+{% endblock %}

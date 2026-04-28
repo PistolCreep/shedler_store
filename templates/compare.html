@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %}Сравнение — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><h1>Сравнение модульных домов</h1></div></section>
+<section class="section">
+  <div class="container">
+    {% if products %}
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr><th>Параметр</th>{% for item in products %}<th>{{ item.name }}</th>{% endfor %}</tr>
+        </thead>
+        <tbody>
+          <tr><td>Цена</td>{% for item in products %}<td>{{ format_price(item.price) }} ₽</td>{% endfor %}</tr>
+          <tr><td>Площадь</td>{% for item in products %}<td>{{ item.area }} м²</td>{% endfor %}</tr>
+          <tr><td>Комнат</td>{% for item in products %}<td>{{ item.rooms }}</td>{% endfor %}</tr>
+          <tr><td>Вместимость</td>{% for item in products %}<td>{{ item.capacity }}</td>{% endfor %}</tr>
+          <tr><td>Сезонность</td>{% for item in products %}<td>{{ item.seasonality }}</td>{% endfor %}</tr>
+          <tr><td>Срок изготовления</td>{% for item in products %}<td>{{ item.production_time }}</td>{% endfor %}</tr>
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="empty-state">В сравнении пока нет товаров.</div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

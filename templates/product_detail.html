@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.name }} — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="section">
+  <div class="container product-layout">
+    <div>
+      <img class="detail-image" src="{{ product.image_url }}" alt="{{ product.name }}">
+    </div>
+    <div class="detail-panel">
+      <span class="category-chip">{{ product.category_name }}</span>
+      <h1>{{ product.name }}</h1>
+      <p class="lead small-lead">{{ product.description }}</p>
+      <div class="detail-price">{{ format_price(product.price) }} ₽</div>
+      <div class="spec-grid">
+        <div><span>Площадь</span><strong>{{ product.area }} м²</strong></div>
+        <div><span>Комнат</span><strong>{{ product.rooms }}</strong></div>
+        <div><span>Вместимость</span><strong>{{ product.capacity }}</strong></div>
+        <div><span>Сезонность</span><strong>{{ product.seasonality }}</strong></div>
+        <div><span>Срок изготовления</span><strong>{{ product.production_time }}</strong></div>
+      </div>
+      <div class="inline-actions wrap">
+        <a class="ghost-btn" href="{{ url_for('toggle_favorite', product_id=product.id) }}">В избранное</a>
+        <a class="ghost-btn" href="{{ url_for('toggle_compare', product_id=product.id) }}">В сравнение</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section alt-bg">
+  <div class="container two-col-layout">
+    <div class="content-card">
+      <h2>Характеристики</h2>
+      <pre class="spec-pre">{{ product.specs }}</pre>
+    </div>
+    <form class="form-card" action="{{ url_for('create_request') }}" method="post">
+      <input type="hidden" name="product_id" value="{{ product.id }}">
+      <h2>Оставить заявку по модели</h2>
+      <label>Ваше имя<input type="text" name="client_name" required></label>
+      <label>Телефон<input type="text" name="phone" required></label>
+      <label>Email<input type="email" name="email"></label>
+      <label>Комментарий<textarea name="message" rows="5" placeholder="Нужна консультация по комплектации и монтажу"></textarea></label>
+      <button class="primary-btn" type="submit">Отправить заявку</button>
+    </form>
+  </div>
+</section>
+{% if compare_products %}
+<section class="section">
+  <div class="container">
+    <h2>Сейчас в сравнении</h2>
+    <div class="compare-mini-grid">
+      {% for item in compare_products %}
+      <div class="feature-box">
+        <strong>{{ item.name }}</strong>
+        <p>{{ item.area }} м² · {{ format_price(item.price) }} ₽</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

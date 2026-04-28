@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block title %}Главная — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="badge">Модульные дома для баз отдыха</span>
+      <h1>Интернет-магазин модульных домов для баз отдыха и глэмпингов</h1>
+      <p class="lead">Готовые решения для турбаз, эко-отелей и глэмпинг-парков. Выбирайте модели, сравнивайте характеристики и отправляйте заявку прямо на сайте.</p>
+      <div class="hero-actions">
+        <a class="primary-btn" href="{{ url_for('catalog') }}">Перейти в каталог</a>
+        <a class="ghost-btn" href="#request-form">Оставить заявку</a>
+      </div>
+      <div class="metrics">
+        <div><strong>5+</strong><span>типов модулей</span></div>
+        <div><strong>20–45</strong><span>дней изготовление</span></div>
+        <div><strong>1–2</strong><span>дня монтаж</span></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80" alt="Модульный дом">
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge">Популярные модели</span>
+        <h2>Подборка востребованных модульных домов</h2>
+      </div>
+      <a class="ghost-btn" href="{{ url_for('catalog') }}">Весь каталог</a>
+    </div>
+    <div class="card-grid">
+      {% for item in featured %}
+      <article class="product-card">
+        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+        <div class="card-body">
+          <span class="category-chip">{{ item.category_name }}</span>
+          <h3>{{ item.name }}</h3>
+          <p>{{ item.short_description }}</p>
+          <div class="product-meta">
+            <span>{{ item.area }} м²</span>
+            <span>{{ item.rooms }} комн.</span>
+            <span>{{ item.capacity }} гостя</span>
+          </div>
+          <div class="product-actions">
+            <strong>{{ format_price(item.price) }} ₽</strong>
+            <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg">
+  <div class="container feature-grid">
+    <div class="feature-box"><h3>Для баз отдыха</h3><p>Быстрое расширение номерного фонда без капитального строительства.</p></div>
+    <div class="feature-box"><h3>Для глэмпингов</h3><p>Современный внешний вид, панорамные окна и гибкая комплектация.</p></div>
+    <div class="feature-box"><h3>Для бизнеса</h3><p>Сервисные и административные модули для сопровождения объекта.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container steps-grid">
+    <div class="section-head left-only">
+      <div>
+        <span class="badge">Как мы работаем</span>
+        <h2>Этапы взаимодействия с заказчиком</h2>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><strong>1</strong><p>Выбор модели или консультация по задаче объекта.</p></div>
+      <div class="step"><strong>2</strong><p>Расчет комплектации, сроков производства и доставки.</p></div>
+      <div class="step"><strong>3</strong><p>Изготовление модуля на производстве ООО «Шедлер».</p></div>
+      <div class="step"><strong>4</strong><p>Доставка, монтаж и подготовка к эксплуатации.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt-bg" id="request-form">
+  <div class="container contact-grid">
+    <div>
+      <span class="badge">Заявка</span>
+      <h2>Подберем модульный дом под вашу базу отдыха</h2>
+      <p>Оставьте контакты, и менеджер подготовит предложение с учетом площади, вместимости и бюджета.</p>
+    </div>
+    <form class="form-card" action="{{ url_for('create_request') }}" method="post">
+      <input type="hidden" name="product_id" value="">
+      <label>Ваше имя<input type="text" name="client_name" required></label>
+      <label>Телефон<input type="text" name="phone" required></label>
+      <label>Email<input type="email" name="email"></label>
+      <label>Комментарий<textarea name="message" rows="5" placeholder="Например: нужен модуль на 4 человека для глэмпинга"></textarea></label>
+      <button class="primary-btn" type="submit">Отправить заявку</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

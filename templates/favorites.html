@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Избранное — ShedlerHouse{% endblock %}
+{% block content %}
+<section class="page-hero small"><div class="container"><h1>Избранные дома</h1></div></section>
+<section class="section"><div class="container card-grid compact">
+  {% for item in products %}
+  <article class="product-card">
+    <img src="{{ item.image_url }}" alt="{{ item.name }}">
+    <div class="card-body">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.short_description }}</p>
+      <div class="product-actions">
+        <strong>{{ format_price(item.price) }} ₽</strong>
+        <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+      </div>
+    </div>
+  </article>
+  {% else %}
+  <div class="empty-state">Избранных домов пока нет.</div>
+  {% endfor %}
+</div></section>
+{% endblock %}
