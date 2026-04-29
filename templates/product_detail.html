@@ -19,8 +19,8 @@
         <div><span>Срок изготовления</span><strong>{{ product.production_time }}</strong></div>
       </div>
       <div class="inline-actions wrap">
-        <a class="ghost-btn" href="{{ url_for('toggle_favorite', product_id=product.id) }}">В избранное</a>
-        <a class="ghost-btn" href="{{ url_for('toggle_compare', product_id=product.id) }}">В сравнение</a>
+        <a class="btn btn-secondary {% if product.id in favorite_ids %}is-active{% endif %}" href="{{ url_for('toggle_favorite', product_id=product.id) }}">{% if product.id in favorite_ids %}♥ В избранном{% else %}♡ В избранное{% endif %}</a>
+        <a class="btn btn-outline {% if product.id in compare_ids %}is-active{% endif %}" href="{{ url_for('toggle_compare', product_id=product.id) }}">{% if product.id in compare_ids %}✓ В сравнении{% else %}Сравнить{% endif %}</a>
       </div>
     </div>
   </div>
@@ -34,11 +34,11 @@
     <form class="form-card" action="{{ url_for('create_request') }}" method="post">
       <input type="hidden" name="product_id" value="{{ product.id }}">
       <h2>Оставить заявку по модели</h2>
-      <label>Ваше имя<input type="text" name="client_name" required></label>
-      <label>Телефон<input type="text" name="phone" required></label>
-      <label>Email<input type="email" name="email"></label>
+      <label>Ваше имя<input type="text" name="client_name" placeholder="Иван Петров" required></label>
+      <label>Телефон<input type="text" name="phone" placeholder="+7 (___) ___-__-__" required></label>
+      <label>Email<input type="email" name="email" placeholder="name@example.ru"></label>
       <label>Комментарий<textarea name="message" rows="5" placeholder="Нужна консультация по комплектации и монтажу"></textarea></label>
-      <button class="primary-btn" type="submit">Отправить заявку</button>
+      <button class="btn btn-primary" type="submit">Отправить заявку</button>
     </form>
   </div>
 </section>

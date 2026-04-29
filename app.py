@@ -302,9 +302,14 @@ def format_price(value: int) -> str:
 @app.context_processor
 def inject_globals() -> Dict[str, Any]:
     categories = query_db("SELECT * FROM categories ORDER BY name")
+    favorites = get_favorites()
+    compare = session.get("compare", [])
     return {
         "nav_categories": categories,
-        "favorite_count": len(get_favorites()),
+        "favorite_ids": favorites,
+        "favorite_count": len(favorites),
+        "compare_ids": compare,
+        "compare_count": len(compare),
         "format_price": format_price,
     }
 
@@ -416,7 +421,7 @@ def compare_page():
     if compare_ids:
         placeholders = ",".join("?" for _ in compare_ids)
         products = query_db(
-            f"SELECT id, name, price, area, rooms, capacity, seasonality, production_time FROM products WHERE id IN ({placeholders})",
+            f"SELECT id, name, slug, image_url, price, area, rooms, capacity, seasonality, production_time FROM products WHERE id IN ({placeholders})",
             tuple(compare_ids),
         )
     return render_template("compare.html", products=products)

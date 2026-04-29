@@ -8,8 +8,8 @@
       <h1>Интернет-магазин модульных домов для баз отдыха и глэмпингов</h1>
       <p class="lead">Готовые решения для турбаз, эко-отелей и глэмпинг-парков. Выбирайте модели, сравнивайте характеристики и отправляйте заявку прямо на сайте.</p>
       <div class="hero-actions">
-        <a class="primary-btn" href="{{ url_for('catalog') }}">Перейти в каталог</a>
-        <a class="ghost-btn" href="#request-form">Оставить заявку</a>
+        <a class="btn btn-primary btn-lg" href="{{ url_for('catalog') }}">Перейти в каталог</a>
+        <a class="btn btn-outline btn-lg" href="#request-form">Оставить заявку</a>
       </div>
       <div class="metrics">
         <div><strong>5+</strong><span>типов модулей</span></div>
@@ -30,12 +30,14 @@
         <span class="badge">Популярные модели</span>
         <h2>Подборка востребованных модульных домов</h2>
       </div>
-      <a class="ghost-btn" href="{{ url_for('catalog') }}">Весь каталог</a>
+      <a class="btn btn-secondary" href="{{ url_for('catalog') }}">Весь каталог</a>
     </div>
     <div class="card-grid">
       {% for item in featured %}
       <article class="product-card">
-        <img src="{{ item.image_url }}" alt="{{ item.name }}">
+        <div class="product-media">
+          <img src="{{ item.image_url }}" alt="{{ item.name }}">
+        </div>
         <div class="card-body">
           <span class="category-chip">{{ item.category_name }}</span>
           <h3>{{ item.name }}</h3>
@@ -45,9 +47,13 @@
             <span>{{ item.rooms }} комн.</span>
             <span>{{ item.capacity }} гостя</span>
           </div>
-          <div class="product-actions">
-            <strong>{{ format_price(item.price) }} ₽</strong>
-            <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+          <div class="product-footer">
+            <span class="product-price">{{ format_price(item.price) }} ₽</span>
+            <div class="card-actions">
+              <a class="btn btn-secondary btn-sm {% if item.id in favorite_ids %}is-active{% endif %}" href="{{ url_for('toggle_favorite', product_id=item.id) }}">{% if item.id in favorite_ids %}♥ В избранном{% else %}♡ В избранное{% endif %}</a>
+              <a class="btn btn-outline btn-sm {% if item.id in compare_ids %}is-active{% endif %}" href="{{ url_for('toggle_compare', product_id=item.id) }}">{% if item.id in compare_ids %}✓ В сравнении{% else %}Сравнить{% endif %}</a>
+              <a class="btn btn-primary btn-sm" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+            </div>
           </div>
         </div>
       </article>
@@ -90,11 +96,11 @@
     </div>
     <form class="form-card" action="{{ url_for('create_request') }}" method="post">
       <input type="hidden" name="product_id" value="">
-      <label>Ваше имя<input type="text" name="client_name" required></label>
-      <label>Телефон<input type="text" name="phone" required></label>
-      <label>Email<input type="email" name="email"></label>
+      <label>Ваше имя<input type="text" name="client_name" placeholder="Иван Петров" required></label>
+      <label>Телефон<input type="text" name="phone" placeholder="+7 (___) ___-__-__" required></label>
+      <label>Email<input type="email" name="email" placeholder="name@example.ru"></label>
       <label>Комментарий<textarea name="message" rows="5" placeholder="Например: нужен модуль на 4 человека для глэмпинга"></textarea></label>
-      <button class="primary-btn" type="submit">Отправить заявку</button>
+      <button class="btn btn-primary" type="submit">Отправить заявку</button>
     </form>
   </div>
 </section>

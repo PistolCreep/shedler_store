@@ -5,6 +5,30 @@
 <section class="section">
   <div class="container">
     {% if products %}
+    <div class="card-grid compact">
+      {% for item in products %}
+      <article class="product-card">
+        <div class="product-media">
+          <img src="{{ item.image_url }}" alt="{{ item.name }}">
+        </div>
+        <div class="card-body">
+          <h3>{{ item.name }}</h3>
+          <div class="product-meta">
+            <span>{{ item.area }} м²</span>
+            <span>{{ item.rooms }} комн.</span>
+            <span>{{ item.capacity }} гостей</span>
+          </div>
+          <div class="product-footer">
+            <span class="product-price">{{ format_price(item.price) }} ₽</span>
+            <div class="card-actions">
+              <a class="btn btn-primary btn-sm" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+              <a class="btn btn-danger btn-sm" href="{{ url_for('toggle_compare', product_id=item.id) }}">Убрать</a>
+            </div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
     <div class="compare-table-wrap">
       <table class="compare-table">
         <thead>

@@ -5,7 +5,7 @@
   <div class="admin-card">
     <div class="section-head">
       <div><h2>Управление товарами</h2></div>
-      <a class="primary-btn" href="{{ url_for('admin_product_create') }}">Добавить товар</a>
+      <a class="btn btn-primary" href="{{ url_for('admin_product_create') }}">Добавить товар</a>
     </div>
     <div class="table-wrap">
       <table class="admin-table">
@@ -18,10 +18,10 @@
             <td>{{ item.category_name }}</td>
             <td>{{ format_price(item.price) }} ₽</td>
             <td>{{ item.area }} м²</td>
-            <td class="inline-actions">
-              <a class="ghost-btn" href="{{ url_for('admin_product_edit', product_id=item.id) }}">Изменить</a>
+            <td class="table-actions">
+              <a class="btn btn-secondary btn-sm" href="{{ url_for('admin_product_edit', product_id=item.id) }}">Изменить</a>
               <form method="post" action="{{ url_for('admin_product_delete', product_id=item.id) }}" onsubmit="return confirm('Удалить товар?')">
-                <button class="danger-btn" type="submit">Удалить</button>
+                <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
               </form>
             </td>
           </tr>

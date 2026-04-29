@@ -38,7 +38,7 @@
             <option value="area_desc" {% if selected.sort == 'area_desc' %}selected{% endif %}>Площадь по убыванию</option>
           </select>
         </label>
-        <button class="primary-btn" type="submit">Применить</button>
+        <button class="btn btn-primary" type="submit">Применить фильтры</button>
       </form>
     </aside>
     <div>
@@ -48,7 +48,9 @@
       <div class="card-grid compact">
         {% for item in products %}
         <article class="product-card">
-          <img src="{{ item.image_url }}" alt="{{ item.name }}">
+          <div class="product-media">
+            <img src="{{ item.image_url }}" alt="{{ item.name }}">
+          </div>
           <div class="card-body">
             <span class="category-chip">{{ item.category_name }}</span>
             <h3>{{ item.name }}</h3>
@@ -58,12 +60,12 @@
               <span>{{ item.rooms }} комн.</span>
               <span>{{ item.capacity }} гостей</span>
             </div>
-            <div class="product-actions stack-mobile">
-              <strong>{{ format_price(item.price) }} ₽</strong>
-              <div class="inline-actions">
-                <a class="ghost-btn" href="{{ url_for('toggle_favorite', product_id=item.id) }}">♡</a>
-                <a class="ghost-btn" href="{{ url_for('toggle_compare', product_id=item.id) }}">≠</a>
-                <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+            <div class="product-footer">
+              <span class="product-price">{{ format_price(item.price) }} ₽</span>
+              <div class="card-actions">
+                <a class="btn btn-secondary btn-sm {% if item.id in favorite_ids %}is-active{% endif %}" href="{{ url_for('toggle_favorite', product_id=item.id) }}">{% if item.id in favorite_ids %}♥ В избранном{% else %}♡ В избранное{% endif %}</a>
+                <a class="btn btn-outline btn-sm {% if item.id in compare_ids %}is-active{% endif %}" href="{{ url_for('toggle_compare', product_id=item.id) }}">{% if item.id in compare_ids %}✓ В сравнении{% else %}Сравнить{% endif %}</a>
+                <a class="btn btn-primary btn-sm" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
               </div>
             </div>
           </div>

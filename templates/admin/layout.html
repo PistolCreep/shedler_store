@@ -14,12 +14,12 @@
   <aside class="admin-sidebar">
     <a class="logo" href="{{ url_for('home') }}">Shedler<span>Admin</span></a>
     <nav>
-      <a href="{{ url_for('admin_dashboard') }}">Панель</a>
-      <a href="{{ url_for('admin_products') }}">Товары</a>
-      <a href="{{ url_for('admin_categories') }}">Категории</a>
-      <a href="{{ url_for('admin_requests') }}">Заявки</a>
-      <a href="{{ url_for('admin_messages') }}">Сообщения</a>
-      <a href="{{ url_for('admin_content') }}">Контент</a>
+      <a class="{% if request.endpoint == 'admin_dashboard' %}is-active{% endif %}" href="{{ url_for('admin_dashboard') }}">Панель</a>
+      <a class="{% if request.endpoint in ['admin_products', 'admin_product_create', 'admin_product_edit'] %}is-active{% endif %}" href="{{ url_for('admin_products') }}">Товары</a>
+      <a class="{% if request.endpoint == 'admin_categories' %}is-active{% endif %}" href="{{ url_for('admin_categories') }}">Категории</a>
+      <a class="{% if request.endpoint == 'admin_requests' %}is-active{% endif %}" href="{{ url_for('admin_requests') }}">Заявки</a>
+      <a class="{% if request.endpoint == 'admin_messages' %}is-active{% endif %}" href="{{ url_for('admin_messages') }}">Сообщения</a>
+      <a class="{% if request.endpoint == 'admin_content' %}is-active{% endif %}" href="{{ url_for('admin_content') }}">Контент</a>
       <a href="{{ url_for('admin_logout') }}">Выйти</a>
     </nav>
   </aside>

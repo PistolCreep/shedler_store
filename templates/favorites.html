@@ -5,13 +5,24 @@
 <section class="section"><div class="container card-grid compact">
   {% for item in products %}
   <article class="product-card">
-    <img src="{{ item.image_url }}" alt="{{ item.name }}">
+    <div class="product-media">
+      <img src="{{ item.image_url }}" alt="{{ item.name }}">
+    </div>
     <div class="card-body">
       <h3>{{ item.name }}</h3>
       <p>{{ item.short_description }}</p>
-      <div class="product-actions">
-        <strong>{{ format_price(item.price) }} ₽</strong>
-        <a class="primary-btn" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+      <div class="product-meta">
+        <span>{{ item.area }} м²</span>
+        <span>{{ item.rooms }} комн.</span>
+        <span>{{ item.capacity }} гостей</span>
+      </div>
+      <div class="product-footer">
+        <span class="product-price">{{ format_price(item.price) }} ₽</span>
+        <div class="card-actions">
+          <a class="btn btn-secondary btn-sm is-active" href="{{ url_for('toggle_favorite', product_id=item.id) }}">♥ Убрать</a>
+          <a class="btn btn-outline btn-sm {% if item.id in compare_ids %}is-active{% endif %}" href="{{ url_for('toggle_compare', product_id=item.id) }}">{% if item.id in compare_ids %}✓ В сравнении{% else %}Сравнить{% endif %}</a>
+          <a class="btn btn-primary btn-sm" href="{{ url_for('product_detail', slug=item.slug) }}">Подробнее</a>
+        </div>
       </div>
     </div>
   </article>

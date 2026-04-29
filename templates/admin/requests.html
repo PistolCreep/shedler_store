@@ -16,13 +16,13 @@
             <td>{{ item.product_name or 'Общая заявка' }}</td>
             <td>{{ item.message }}</td>
             <td>
-              <form method="post" action="{{ url_for('admin_request_status', request_id=item.id) }}">
+              <form class="status-form" method="post" action="{{ url_for('admin_request_status', request_id=item.id) }}">
                 <select name="status">
                   {% for status in ['Новая', 'В работе', 'Завершена', 'Отменена'] %}
                     <option value="{{ status }}" {% if item.status == status %}selected{% endif %}>{{ status }}</option>
                   {% endfor %}
                 </select>
-                <button class="ghost-btn" type="submit">Ок</button>
+                <button class="btn btn-secondary btn-sm" type="submit">Изменить статус</button>
               </form>
             </td>
           </tr>

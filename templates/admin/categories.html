@@ -4,10 +4,10 @@
 <section class="admin-section split-admin">
   <form class="admin-card" method="post">
     <h2>Добавить категорию</h2>
-    <label>Название<input type="text" name="name" required></label>
-    <label>Slug<input type="text" name="slug" required></label>
-    <label>Описание<textarea name="description" rows="5"></textarea></label>
-    <button class="primary-btn" type="submit">Добавить</button>
+    <label>Название<input type="text" name="name" placeholder="Дома для баз отдыха" required></label>
+    <label>Slug<input type="text" name="slug" placeholder="base-otdyha" required></label>
+    <label>Описание<textarea name="description" rows="5" placeholder="Краткое описание категории"></textarea></label>
+    <button class="btn btn-primary" type="submit">Добавить</button>
   </form>
   <div class="admin-card">
     <h2>Список категорий</h2>
@@ -18,9 +18,9 @@
           {% for item in categories %}
           <tr>
             <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.slug }}</td>
-            <td>
+            <td class="table-actions">
               <form method="post" action="{{ url_for('admin_category_delete', category_id=item.id) }}" onsubmit="return confirm('Удалить категорию?')">
-                <button class="danger-btn" type="submit">Удалить</button>
+                <button class="btn btn-danger btn-sm" type="submit">Удалить</button>
               </form>
             </td>
           </tr>
