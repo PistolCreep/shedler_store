@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" role="img" aria-labelledby="title desc">
+  <title id="title">Family module</title>
+  <desc id="desc">A wider family modular house with two window zones.</desc>
+  <rect width="520" height="360" fill="#17261f"/>
+  <path d="M0 252 C76 221 180 232 254 207 C356 172 449 199 520 169 L520 360 L0 360 Z" fill="#0f1914"/>
+  <path d="M72 205 L229 121 H394 L462 205 Z" fill="#101513"/>
+  <rect x="92" y="205" width="342" height="94" fill="#cfc6af"/>
+  <rect x="128" y="226" width="74" height="47" fill="#8bdcaf"/>
+  <rect x="229" y="226" width="74" height="47" fill="#8bdcaf"/>
+  <rect x="334" y="220" width="62" height="79" fill="#17231d"/>
+  <rect x="77" y="299" width="373" height="21" fill="#6b4528"/>
+</svg>

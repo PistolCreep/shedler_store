@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Forest modular house</title>
+  <desc id="desc">A large modular house scene near the forest.</desc>
+  <rect width="900" height="620" fill="#102018"/>
+  <path d="M0 431 C149 360 299 399 438 345 C626 272 762 337 900 277 L900 620 L0 620 Z" fill="#172a1c"/>
+  <path d="M173 360 L417 218 L707 360 Z" fill="#0c1110"/>
+  <rect x="214" y="360" width="450" height="135" fill="#d8ccb4"/>
+  <rect x="429" y="313" width="202" height="182" fill="#101816"/>
+  <rect x="454" y="338" width="148" height="112" fill="#8bdfb5"/>
+  <rect x="175" y="495" width="532" height="38" fill="#70482a"/>
+</svg>

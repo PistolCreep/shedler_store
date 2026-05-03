@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" role="img" aria-labelledby="title desc">
+  <title id="title">Glamping cabin</title>
+  <desc id="desc">A compact glamping module with terrace.</desc>
+  <rect width="520" height="360" fill="#133529"/>
+  <circle cx="410" cy="72" r="48" fill="#f7c948" opacity=".22"/>
+  <path d="M0 254 C95 212 183 232 266 206 C375 171 443 199 520 167 L520 360 L0 360 Z" fill="#101a13"/>
+  <path d="M82 207 L251 109 L428 207 Z" fill="#0d1210"/>
+  <rect x="112" y="207" width="288" height="83" fill="#d8ceb7"/>
+  <rect x="233" y="170" width="145" height="120" fill="#111a16"/>
+  <rect x="254" y="190" width="96" height="74" fill="#90e0b3"/>
+  <rect x="89" y="290" width="326" height="25" fill="#6f482b"/>
+</svg>

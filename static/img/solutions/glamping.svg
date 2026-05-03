@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
+  <title id="title">Glamping module</title>
+  <desc id="desc">A modern glamping module with a terrace and warm panoramic light.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#1e5c48"/>
+      <stop offset=".58" stop-color="#10231c"/>
+      <stop offset="1" stop-color="#08100e"/>
+    </linearGradient>
+    <linearGradient id="window" x1="0" x2="1">
+      <stop offset="0" stop-color="#f4f0c6"/>
+      <stop offset=".6" stop-color="#63d698"/>
+      <stop offset="1" stop-color="#143d34"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="460" fill="url(#bg)"/>
+  <circle cx="572" cy="106" r="74" fill="#f7c948" opacity=".18"/>
+  <path d="M0 326 C131 293 225 305 350 283 C495 257 579 284 720 247 L720 460 L0 460 Z" fill="#111b14"/>
+  <g>
+    <path d="M143 266 L364 140 L590 266 Z" fill="#101614"/>
+    <path d="M182 266 H552 V360 H182 Z" fill="#d9cfb5"/>
+    <path d="M304 206 H524 V360 H304 Z" fill="#101815"/>
+    <rect x="328" y="228" width="174" height="106" fill="url(#window)"/>
+    <path d="M330 280 H502 M386 228 V334 M445 228 V334" stroke="#0b1713" stroke-width="7" opacity=".55"/>
+    <rect x="125" y="360" width="495" height="34" fill="#71492c"/>
+    <rect x="161" y="394" width="417" height="20" fill="#3d281b"/>
+  </g>
+</svg>

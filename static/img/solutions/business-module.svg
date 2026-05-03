@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
+  <title id="title">Business service module</title>
+  <desc id="desc">A clean administrative modular building for business infrastructure.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#253b34"/>
+      <stop offset="1" stop-color="#0b1210"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1">
+      <stop offset="0" stop-color="#9ce6bc"/>
+      <stop offset="1" stop-color="#1d4b3f"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="460" fill="url(#bg)"/>
+  <path d="M0 348 C95 318 190 332 301 302 C429 268 560 294 720 250 L720 460 L0 460 Z" fill="#111b16"/>
+  <g>
+    <rect x="121" y="197" width="478" height="174" rx="10" fill="#cfc6b1"/>
+    <path d="M121 197 H599 L557 150 H163 Z" fill="#101614"/>
+    <rect x="154" y="236" width="97" height="83" fill="url(#glass)"/>
+    <rect x="280" y="236" width="102" height="83" fill="url(#glass)"/>
+    <rect x="414" y="236" width="126" height="135" fill="#18231f"/>
+    <rect x="439" y="259" width="77" height="63" fill="url(#glass)"/>
+    <rect x="96" y="371" width="528" height="26" fill="#604026"/>
+    <path d="M154 334 H382" stroke="#f6d788" stroke-width="7" opacity=".52"/>
+  </g>
+</svg>

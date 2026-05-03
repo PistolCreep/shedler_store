@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 460" role="img" aria-labelledby="title desc">
+  <title id="title">Base camp modular houses</title>
+  <desc id="desc">Several compact modular houses arranged for a recreation base.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#214b39"/>
+      <stop offset="1" stop-color="#0c1713"/>
+    </linearGradient>
+    <linearGradient id="house" x1="0" x2="1">
+      <stop offset="0" stop-color="#efe2c7"/>
+      <stop offset="1" stop-color="#696a57"/>
+    </linearGradient>
+  </defs>
+  <rect width="720" height="460" fill="url(#bg)"/>
+  <path d="M0 333 C132 281 224 312 341 275 C482 231 601 271 720 230 L720 460 L0 460 Z" fill="#122117"/>
+  <g opacity=".45" fill="#183426">
+    <path d="M55 176 L96 91 L139 176 Z"/>
+    <path d="M560 169 L606 70 L653 169 Z"/>
+    <path d="M620 252 L672 145 L720 252 Z"/>
+  </g>
+  <g>
+    <path d="M113 276 L236 204 L374 276 Z" fill="#111714"/>
+    <rect x="137" y="276" width="211" height="90" fill="url(#house)"/>
+    <rect x="179" y="302" width="54" height="48" fill="#173c32"/>
+    <rect x="247" y="302" width="70" height="48" fill="#8fdcb2"/>
+    <path d="M379 296 L484 234 L602 296 Z" fill="#111714"/>
+    <rect x="401" y="296" width="178" height="76" fill="#d8cfb9"/>
+    <rect x="435" y="317" width="50" height="39" fill="#8fdcb2"/>
+    <rect x="501" y="317" width="44" height="39" fill="#15352d"/>
+    <rect x="92" y="365" width="530" height="25" fill="#6c482a"/>
+  </g>
+</svg>

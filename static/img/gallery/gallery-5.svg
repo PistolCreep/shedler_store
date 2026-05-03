@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" role="img" aria-labelledby="title desc">
+  <title id="title">Lake module</title>
+  <desc id="desc">A modular house placed near a calm water line.</desc>
+  <rect width="520" height="360" fill="#102922"/>
+  <path d="M0 250 C93 211 184 226 268 202 C377 170 446 193 520 162 L520 294 C407 319 301 289 195 314 C110 333 44 322 0 341 Z" fill="#132018"/>
+  <path d="M0 293 C115 270 216 302 319 279 C403 260 459 269 520 250 L520 360 L0 360 Z" fill="#123c37"/>
+  <path d="M83 198 L255 101 L439 198 Z" fill="#0d1210"/>
+  <rect x="113" y="198" width="299" height="86" fill="#d6ccb6"/>
+  <rect x="247" y="157" width="139" height="127" fill="#101816"/>
+  <rect x="268" y="179" width="93" height="73" fill="#8bdcaf"/>
+  <rect x="101" y="284" width="326" height="20" fill="#70472b"/>
+</svg>

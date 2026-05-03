@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Modular house near forest</title>
+  <desc id="desc">A premium modular house with panoramic windows in a quiet forest setting.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#17372d"/>
+      <stop offset=".48" stop-color="#0f221d"/>
+      <stop offset="1" stop-color="#08110f"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1">
+      <stop offset="0" stop-color="#d8f9df" stop-opacity=".92"/>
+      <stop offset=".45" stop-color="#86e5ba" stop-opacity=".78"/>
+      <stop offset="1" stop-color="#18493c" stop-opacity=".9"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0" x2="1">
+      <stop offset="0" stop-color="#f0e6d2"/>
+      <stop offset=".58" stop-color="#b6aa91"/>
+      <stop offset="1" stop-color="#4e584b"/>
+    </linearGradient>
+    <linearGradient id="deck" x1="0" x2="1">
+      <stop offset="0" stop-color="#b77d45"/>
+      <stop offset="1" stop-color="#5c3b24"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="32" stdDeviation="28" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+    <radialGradient id="light" cx=".62" cy=".34" r=".5">
+      <stop offset="0" stop-color="#7bf0a5" stop-opacity=".32"/>
+      <stop offset="1" stop-color="#7bf0a5" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="820" fill="url(#sky)"/>
+  <rect width="1200" height="820" fill="url(#light)"/>
+  <path d="M0 626 C165 566 284 590 420 552 C594 505 745 557 902 521 C1030 492 1114 525 1200 486 L1200 820 L0 820 Z" fill="#15231b"/>
+  <path d="M0 677 C210 635 313 664 475 626 C640 588 800 625 964 584 C1068 558 1138 575 1200 546 L1200 820 L0 820 Z" fill="#0e1813"/>
+  <g opacity=".42">
+    <path d="M77 153 L130 60 L184 153 Z" fill="#1f4a37"/>
+    <path d="M112 198 L172 91 L235 198 Z" fill="#183929"/>
+    <path d="M988 159 L1042 62 L1098 159 Z" fill="#1f4a37"/>
+    <path d="M1045 222 L1114 91 L1185 222 Z" fill="#153526"/>
+    <path d="M794 152 L848 54 L902 152 Z" fill="#173c2c"/>
+    <path d="M15 253 L81 126 L151 253 Z" fill="#122b20"/>
+  </g>
+  <g filter="url(#shadow)">
+    <path d="M221 450 L562 255 L945 450 Z" fill="#111815"/>
+    <path d="M257 449 H904 V621 H257 Z" fill="url(#wall)"/>
+    <path d="M584 343 H879 V621 H584 Z" fill="#111a17"/>
+    <path d="M612 372 H846 V591 H612 Z" fill="url(#glass)"/>
+    <path d="M301 472 H532 V621 H301 Z" fill="#2b352e"/>
+    <path d="M325 495 H506 V594 H325 Z" fill="#18231d"/>
+    <path d="M338 506 H492 V585 H338 Z" fill="url(#glass)" opacity=".76"/>
+    <path d="M216 621 H950 L1014 695 H154 Z" fill="url(#deck)"/>
+    <path d="M181 691 H984 V718 H181 Z" fill="#3b2617"/>
+    <path d="M236 640 H923" stroke="#f3d596" stroke-opacity=".4" stroke-width="6"/>
+    <path d="M626 372 V591 M691 372 V591 M759 372 V591 M612 444 H846 M612 517 H846" stroke="#0e1914" stroke-width="8" opacity=".62"/>
+    <path d="M257 449 H904" stroke="#f2e4c5" stroke-opacity=".5" stroke-width="5"/>
+  </g>
+  <g opacity=".78">
+    <circle cx="214" cy="250" r="3" fill="#c9ffce"/>
+    <circle cx="1031" cy="296" r="3" fill="#c9ffce"/>
+    <circle cx="721" cy="139" r="2" fill="#c9ffce"/>
+    <circle cx="436" cy="186" r="2" fill="#c9ffce"/>
+  </g>
+</svg>

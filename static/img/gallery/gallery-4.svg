@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" role="img" aria-labelledby="title desc">
+  <title id="title">Administrative module</title>
+  <desc id="desc">An administrative modular block with clean facade.</desc>
+  <rect width="520" height="360" fill="#192923"/>
+  <path d="M0 260 C102 217 174 236 263 214 C360 190 439 199 520 176 L520 360 L0 360 Z" fill="#101a15"/>
+  <rect x="78" y="162" width="365" height="139" rx="8" fill="#d2c9b4"/>
+  <path d="M78 162 H443 L407 123 H114 Z" fill="#0c1110"/>
+  <rect x="112" y="195" width="78" height="56" fill="#91dfb4"/>
+  <rect x="218" y="195" width="78" height="56" fill="#91dfb4"/>
+  <rect x="329" y="192" width="62" height="109" fill="#17231e"/>
+  <rect x="65" y="301" width="392" height="20" fill="#5f3e25"/>
+</svg>

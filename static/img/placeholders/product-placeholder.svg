@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" role="img" aria-labelledby="title desc">
+  <title id="title">Modular house placeholder</title>
+  <desc id="desc">Fallback image for a modular house card.</desc>
+  <rect width="900" height="620" fill="#14211b"/>
+  <path d="M0 426 C152 371 283 399 430 346 C612 281 757 332 900 286 L900 620 L0 620 Z" fill="#0e1712"/>
+  <path d="M172 356 L430 209 L725 356 Z" fill="#0b1110"/>
+  <rect x="213" y="356" width="462" height="138" fill="#d9ccb4"/>
+  <rect x="440" y="306" width="204" height="188" fill="#101816"/>
+  <rect x="467" y="333" width="148" height="115" fill="#8bdcaf"/>
+  <rect x="248" y="386" width="126" height="74" fill="#17362d"/>
+  <rect x="174" y="494" width="548" height="38" fill="#6b4528"/>
+  <path d="M257 547 H643" stroke="#49d17d" stroke-width="8" stroke-linecap="round" opacity=".7"/>
+</svg>

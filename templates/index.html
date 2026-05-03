@@ -3,27 +3,70 @@
 {% block content %}
 <section class="hero">
   <div class="container hero-grid">
-    <div>
-      <span class="badge">Модульные дома для баз отдыха</span>
-      <h1>Интернет-магазин модульных домов для баз отдыха и глэмпингов</h1>
-      <p class="lead">Готовые решения для турбаз, эко-отелей и глэмпинг-парков. Выбирайте модели, сравнивайте характеристики и отправляйте заявку прямо на сайте.</p>
+    <div class="hero-copy">
+      <span class="badge">Модульные дома под коммерческие задачи</span>
+      <h1>Модульные дома для баз отдыха, глэмпингов и бизнеса</h1>
+      <p class="lead">Помогаем быстро расширить номерной фонд, запустить глэмпинг или собрать сервисную инфраструктуру без долгого капитального строительства.</p>
       <div class="hero-actions">
         <a class="btn btn-primary btn-lg" href="{{ url_for('catalog') }}">Перейти в каталог</a>
         <a class="btn btn-outline btn-lg" href="#request-form">Оставить заявку</a>
       </div>
-      <div class="metrics">
+      <div class="metrics" aria-label="Ключевые показатели ShedlerHouse">
         <div><strong>5+</strong><span>типов модулей</span></div>
         <div><strong>20–45</strong><span>дней изготовление</span></div>
         <div><strong>1–2</strong><span>дня монтаж</span></div>
       </div>
     </div>
-    <div class="hero-card">
-      <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80" alt="Модульный дом">
+    <div class="hero-visual">
+      <div class="hero-card hero-image-card">
+        <img src="{{ url_for('static', filename='img/hero/modular-house-hero.svg') }}" alt="Модульный дом с панорамными окнами у леса">
+      </div>
+      <div class="floating-card float-time">20–45 дней изготовление</div>
+      <div class="floating-card float-install">Монтаж за 1–2 дня</div>
+      <div class="floating-card float-audience">Для баз отдыха и глэмпингов</div>
     </div>
   </div>
 </section>
 
-<section class="section">
+<section class="section solutions-section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge">Решения под разные задачи</span>
+        <h2>Подберите формат под ваш объект</h2>
+      </div>
+      <a class="btn btn-secondary" href="{{ url_for('catalog') }}">Перейти в каталог</a>
+    </div>
+    <div class="solution-grid">
+      <article class="solution-card">
+        <img src="{{ url_for('static', filename='img/solutions/base-camp.svg') }}" alt="Модульные дома для базы отдыха" loading="lazy">
+        <div class="solution-content">
+          <h3>Для баз отдыха</h3>
+          <p>Быстрое расширение номерного фонда, гостевые домики и сезонные решения для туристических комплексов.</p>
+          <a class="btn btn-outline btn-sm" href="{{ url_for('catalog') }}">Посмотреть решения</a>
+        </div>
+      </article>
+      <article class="solution-card">
+        <img src="{{ url_for('static', filename='img/solutions/glamping.svg') }}" alt="Глэмпинг-модуль с террасой" loading="lazy">
+        <div class="solution-content">
+          <h3>Для глэмпингов</h3>
+          <p>Атмосферные модули с панорамными окнами, террасами и современной архитектурой для премиального отдыха.</p>
+          <a class="btn btn-outline btn-sm" href="{{ url_for('catalog') }}">Посмотреть решения</a>
+        </div>
+      </article>
+      <article class="solution-card">
+        <img src="{{ url_for('static', filename='img/solutions/business-module.svg') }}" alt="Сервисный модуль для бизнеса" loading="lazy">
+        <div class="solution-content">
+          <h3>Для бизнеса</h3>
+          <p>Административные блоки, ресепшен, сервисные помещения и модули для обслуживания территории.</p>
+          <a class="btn btn-outline btn-sm" href="{{ url_for('catalog') }}">Перейти в каталог</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section featured-section alt-bg">
   <div class="container">
     <div class="section-head">
       <div>
@@ -32,17 +75,24 @@
       </div>
       <a class="btn btn-secondary" href="{{ url_for('catalog') }}">Весь каталог</a>
     </div>
-    <div class="card-grid">
+    <div class="card-grid product-grid">
       {% for item in featured %}
       <article class="product-card">
-        <div class="product-media">
-          <img src="{{ item.image_url }}" alt="{{ item.name }}">
-        </div>
+        <a class="product-media" href="{{ url_for('product_detail', slug=item.slug) }}" aria-label="Подробнее о модели {{ item.name }}">
+          {% if loop.index == 1 %}
+            <span class="product-label">Популярное</span>
+          {% elif loop.index == 2 %}
+            <span class="product-label">Для глэмпинга</span>
+          {% else %}
+            <span class="product-label">Семейный формат</span>
+          {% endif %}
+          <img src="{{ item.image_url or url_for('static', filename='img/placeholders/product-placeholder.svg') }}" alt="{{ item.name }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
+        </a>
         <div class="card-body">
           <span class="category-chip">{{ item.category_name }}</span>
           <h3>{{ item.name }}</h3>
           <p>{{ item.short_description }}</p>
-          <div class="product-meta">
+          <div class="product-meta" aria-label="Характеристики модели">
             <span>{{ item.area }} м²</span>
             <span>{{ item.rooms }} комн.</span>
             <span>{{ item.capacity }} гостя</span>
@@ -62,45 +112,155 @@
   </div>
 </section>
 
-<section class="section alt-bg">
-  <div class="container feature-grid">
-    <div class="feature-box"><h3>Для баз отдыха</h3><p>Быстрое расширение номерного фонда без капитального строительства.</p></div>
-    <div class="feature-box"><h3>Для глэмпингов</h3><p>Современный внешний вид, панорамные окна и гибкая комплектация.</p></div>
-    <div class="feature-box"><h3>Для бизнеса</h3><p>Сервисные и административные модули для сопровождения объекта.</p></div>
+<section class="section benefits-section">
+  <div class="container">
+    <div class="section-head left-only">
+      <div>
+        <span class="badge">Почему выбирают ShedlerHouse</span>
+        <h2>Продуманные модули для коммерческой эксплуатации</h2>
+      </div>
+    </div>
+    <div class="benefits-grid">
+      <article class="benefit-card">
+        <span class="benefit-icon">01</span>
+        <h3>Быстрый монтаж</h3>
+        <p>Модуль приезжает готовым к установке, монтаж занимает 1–2 дня после подготовки площадки.</p>
+      </article>
+      <article class="benefit-card">
+        <span class="benefit-icon">02</span>
+        <h3>Современная архитектура</h3>
+        <p>Лаконичные фасады, панорамное остекление и внешний вид, который повышает ценность объекта.</p>
+      </article>
+      <article class="benefit-card">
+        <span class="benefit-icon">03</span>
+        <h3>Гибкая комплектация</h3>
+        <p>Можно адаптировать отделку, инженерные опции, террасу и планировку под сценарий использования.</p>
+      </article>
+      <article class="benefit-card">
+        <span class="benefit-icon">04</span>
+        <h3>Для турбаз и глэмпингов</h3>
+        <p>Форматы подходят для размещения гостей, VIP-домиков, сервисных блоков и сезонных площадок.</p>
+      </article>
+      <article class="benefit-card">
+        <span class="benefit-icon">05</span>
+        <h3>Доставка и установка</h3>
+        <p>Организуем логистику, монтаж и подготовку дома к подключению инженерных коммуникаций.</p>
+      </article>
+      <article class="benefit-card">
+        <span class="benefit-icon">06</span>
+        <h3>Экономия бюджета</h3>
+        <p>Модульный формат снижает сроки запуска и расходы по сравнению с капитальным строительством.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container steps-grid">
+<section class="section gallery-section alt-bg">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="badge">Галерея проектов</span>
+        <h2>Витрина форматов для разных площадок</h2>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-item gallery-featured">
+        <img src="{{ url_for('static', filename='img/gallery/gallery-1.svg') }}" alt="Дом у леса" loading="lazy">
+        <figcaption>Дом у леса</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery/gallery-2.svg') }}" alt="Глэмпинг-модуль" loading="lazy">
+        <figcaption>Глэмпинг-модуль</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery/gallery-3.svg') }}" alt="Семейный модуль" loading="lazy">
+        <figcaption>Семейный модуль</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery/gallery-4.svg') }}" alt="Административный блок" loading="lazy">
+        <figcaption>Административный блок</figcaption>
+      </figure>
+      <figure class="gallery-item">
+        <img src="{{ url_for('static', filename='img/gallery/gallery-5.svg') }}" alt="Модуль у воды" loading="lazy">
+        <figcaption>Модуль у воды</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section steps-section">
+  <div class="container">
     <div class="section-head left-only">
       <div>
         <span class="badge">Как мы работаем</span>
-        <h2>Этапы взаимодействия с заказчиком</h2>
+        <h2>Четкий путь от подбора модели до монтажа</h2>
       </div>
     </div>
-    <div class="steps">
-      <div class="step"><strong>1</strong><p>Выбор модели или консультация по задаче объекта.</p></div>
-      <div class="step"><strong>2</strong><p>Расчет комплектации, сроков производства и доставки.</p></div>
-      <div class="step"><strong>3</strong><p>Изготовление модуля на производстве ООО «Шедлер».</p></div>
-      <div class="step"><strong>4</strong><p>Доставка, монтаж и подготовка к эксплуатации.</p></div>
+    <div class="steps timeline">
+      <article class="step">
+        <strong>1</strong>
+        <h3>Подбор модели</h3>
+        <p>Определяем задачу объекта, вместимость, сезонность и подходящий тип модуля.</p>
+      </article>
+      <article class="step">
+        <strong>2</strong>
+        <h3>Расчет комплектации</h3>
+        <p>Формируем предложение по отделке, инженерии, срокам производства и доставке.</p>
+      </article>
+      <article class="step">
+        <strong>3</strong>
+        <h3>Производство модуля</h3>
+        <p>Изготавливаем дом на производстве ООО «Шедлер» и готовим его к транспортировке.</p>
+      </article>
+      <article class="step">
+        <strong>4</strong>
+        <h3>Доставка и монтаж</h3>
+        <p>Привозим модуль на площадку, устанавливаем и передаем объект к эксплуатации.</p>
+      </article>
     </div>
   </div>
 </section>
 
-<section class="section alt-bg" id="request-form">
-  <div class="container contact-grid">
-    <div>
-      <span class="badge">Заявка</span>
-      <h2>Подберем модульный дом под вашу базу отдыха</h2>
-      <p>Оставьте контакты, и менеджер подготовит предложение с учетом площади, вместимости и бюджета.</p>
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-banner">
+      <div>
+        <span class="badge">Индивидуальный подбор</span>
+        <h2>Подберем модульный дом под вашу базу отдыха</h2>
+        <p>Расскажите о площадке, планируемой загрузке и бюджете. Менеджер предложит подходящие модели и комплектацию.</p>
+        <a class="btn btn-primary btn-lg" href="#request-form">Оставить заявку</a>
+      </div>
+      <div class="cta-card">
+        <span>Что учтем</span>
+        <ul>
+          <li>сезонность эксплуатации;</li>
+          <li>вместимость и планировку;</li>
+          <li>сроки запуска объекта;</li>
+          <li>логистику и монтаж.</li>
+        </ul>
+      </div>
     </div>
-    <form class="form-card" action="{{ url_for('create_request') }}" method="post">
+  </div>
+</section>
+
+<section class="section request-section alt-bg" id="request-form">
+  <div class="container contact-grid">
+    <div class="request-copy">
+      <span class="badge">Заявка</span>
+      <h2>Оставьте контакты для расчета</h2>
+      <p>Менеджер свяжется с вами и подготовит предложение с учетом площади, вместимости, комплектации и сроков запуска.</p>
+      <div class="request-note">
+        <strong>Что будет дальше</strong>
+        <span>Уточним задачу, предложим подходящие модели и рассчитаем ориентировочную стоимость.</span>
+      </div>
+    </div>
+    <form class="form-card request-form" action="{{ url_for('create_request') }}" method="post">
       <input type="hidden" name="product_id" value="">
       <label>Ваше имя<input type="text" name="client_name" placeholder="Иван Петров" required></label>
       <label>Телефон<input type="text" name="phone" placeholder="+7 (___) ___-__-__" required></label>
       <label>Email<input type="email" name="email" placeholder="name@example.ru"></label>
       <label>Комментарий<textarea name="message" rows="5" placeholder="Например: нужен модуль на 4 человека для глэмпинга"></textarea></label>
-      <button class="btn btn-primary" type="submit">Отправить заявку</button>
+      <button class="btn btn-primary btn-lg" type="submit">Отправить заявку</button>
     </form>
   </div>
 </section>
