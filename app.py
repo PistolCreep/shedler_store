@@ -21,7 +21,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 BASE_DIR = Path(__file__).resolve().parent
 DATABASE = BASE_DIR / "instance" / "shedler.db"
+STATIC_DIR = BASE_DIR / "static"
 UPLOAD_DIR = BASE_DIR / "static" / "uploads"
+IMAGE_EXTENSIONS = (".png", ".jpg", ".jpeg", ".webp", ".svg")
+PLACEHOLDER_IMAGE = "img/placeholders/product-placeholder.svg"
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "shedler-diploma-secret-key-change-me"
@@ -172,7 +175,7 @@ def seed_products() -> None:
             "Компактный модульный дом для баз отдыха и туристических комплексов.",
             "Модель Shedler Forest 24 разработана для размещения 2 гостей и подходит для установки на территории базы отдыха, глэмпинга или загородного комплекса. Дом оснащается утепленным каркасом, панорамным остеклением и возможностью индивидуальной отделки.",
             "Каркас: металлический усиленный\nУтепление: минеральная вата 150 мм\nОтделка: имитация бруса / ЛДСП\nСанузел: опционально\nЭлектрика: базовая разводка\nТеплый пол: опция",
-            "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80",
+            "/static/img/gallery/ShedlerForest24.png",
             1,
         ),
         (
@@ -188,7 +191,7 @@ def seed_products() -> None:
             "Современный глэмпинг-модуль с террасой и продуманной планировкой.",
             "Shedler Lake 36 — универсальный модульный дом для размещения семей или пар. Подходит для турбаз и глэмпинг-парков, где важны эстетика, скорость монтажа и высокий уровень комфорта.",
             "Каркас: металлокаркас\nУтепление: PIR-панели\nОкна: панорамные стеклопакеты\nТерраса: входит в базовую комплектацию\nСанузел: встроенный\nКухонная зона: предусмотрена",
-            "https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80",
+            "/static/img/gallery/ShedlerLake36.png",
             1,
         ),
         (
@@ -204,7 +207,7 @@ def seed_products() -> None:
             "Просторный гостевой дом для размещения семей и больших компаний.",
             "Модель ориентирована на владельцев баз отдыха, которым важно увеличить вместимость объекта и предложить гостям полноценный уровень проживания. Подходит как под краткосрочную аренду, так и под длительное проживание персонала.",
             "Каркас: металлический\nУтепление: 200 мм\nОтделка фасада: фиброцементные панели\nКомнаты: 3\nСанузел: 1\nКухня-гостиная: есть",
-            "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+            "/static/img/gallery/ShedlerFamily48.png",
             0,
         ),
         (
@@ -220,7 +223,7 @@ def seed_products() -> None:
             "Служебный модуль для администрации, охраны или санитарного блока.",
             "Практичное решение для создания административного пространства, ресепшена или служебного помещения на территории базы отдыха. Может использоваться как точка приема гостей или бытовой блок.",
             "Каркас: стальной\nУтепление: 100 мм\nНазначение: сервисный модуль\nСанузел: по запросу\nЭлектрика: включена\nВодоснабжение: опционально",
-            "https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80",
+            "/static/img/gallery/ShedlerService18.png",
             0,
         ),
         (
@@ -236,7 +239,7 @@ def seed_products() -> None:
             "Экономичное решение для быстрого расширения номерного фонда базы отдыха.",
             "Shedler Eco 30 подходит для сезонной эксплуатации и позволяет быстро организовать проживание гостей с минимальными затратами на строительство и монтаж.",
             "Каркас: облегченный металлический\nУтепление: 100 мм\nКомнаты: 2\nПлощадь: 30 м²\nМонтаж: 1–2 дня\nОтделка: базовая",
-            "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?auto=format&fit=crop&w=1200&q=80",
+            "/static/img/gallery/ShedlerEco30.png",
             1,
         ),
     ]
@@ -299,6 +302,50 @@ def format_price(value: int) -> str:
     return f"{value:,}".replace(",", " ")
 
 
+def _static_url_if_exists(filename: str) -> Optional[str]:
+    normalized = filename.replace("\\", "/").strip().lstrip("/")
+    if normalized.startswith("static/"):
+        normalized = normalized[len("static/") :]
+
+    candidate = (STATIC_DIR / normalized).resolve()
+    try:
+        candidate.relative_to(STATIC_DIR.resolve())
+    except ValueError:
+        return None
+
+    if candidate.is_file():
+        return url_for("static", filename=normalized)
+    return None
+
+
+def _compact_filename(value: str) -> str:
+    return "".join(char for char in value if char.isalnum())
+
+
+def product_image_url(product: Any) -> str:
+    image_url = str(product["image_url"] or "").strip()
+    if image_url.startswith(("http://", "https://", "data:")):
+        return image_url
+
+    if image_url:
+        direct_url = _static_url_if_exists(image_url)
+        if direct_url:
+            return direct_url
+
+        basename = Path(image_url.replace("\\", "/")).name
+        gallery_url = _static_url_if_exists(f"img/gallery/{basename}")
+        if gallery_url:
+            return gallery_url
+
+    compact_name = _compact_filename(str(product["name"] or ""))
+    for extension in IMAGE_EXTENSIONS:
+        gallery_url = _static_url_if_exists(f"img/gallery/{compact_name}{extension}")
+        if gallery_url:
+            return gallery_url
+
+    return url_for("static", filename=PLACEHOLDER_IMAGE)
+
+
 @app.context_processor
 def inject_globals() -> Dict[str, Any]:
     categories = query_db("SELECT * FROM categories ORDER BY name")
@@ -311,6 +358,7 @@ def inject_globals() -> Dict[str, Any]:
         "compare_ids": compare,
         "compare_count": len(compare),
         "format_price": format_price,
+        "product_image_url": product_image_url,
     }
 
 
@@ -319,7 +367,8 @@ def home():
     featured = query_db(
         "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON c.id = p.category_id WHERE is_featured = 1 ORDER BY p.id DESC LIMIT 3"
     )
-    return render_template("index.html", featured=featured)
+    gallery_products = query_db("SELECT name, image_url FROM products ORDER BY id")
+    return render_template("index.html", featured=featured, gallery_products=gallery_products)
 
 
 @app.route("/catalog")

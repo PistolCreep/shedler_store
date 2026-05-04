@@ -4,7 +4,7 @@
 <section class="section">
   <div class="container product-layout">
     <div>
-      <img class="detail-image" src="{{ product.image_url or url_for('static', filename='img/placeholders/product-placeholder.svg') }}" alt="{{ product.name }}" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
+      <img class="detail-image" src="{{ product_image_url(product) }}" alt="{{ product.name }}" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
     </div>
     <div class="detail-panel">
       <span class="category-chip">{{ product.category_name }}</span>

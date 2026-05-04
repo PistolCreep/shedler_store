@@ -19,7 +19,7 @@
     </div>
     <div class="hero-visual">
       <div class="hero-card hero-image-card">
-        <img src="{{ url_for('static', filename='img/hero/modular-house-hero.svg') }}" alt="Модульный дом с панорамными окнами у леса">
+        <img src="{{ url_for('static', filename='img/hero/mainpic.png') }}" alt="Модульный дом с панорамными окнами у леса">
       </div>
       <div class="floating-card float-time">20–45 дней изготовление</div>
       <div class="floating-card float-install">Монтаж за 1–2 дня</div>
@@ -86,7 +86,7 @@
           {% else %}
             <span class="product-label">Семейный формат</span>
           {% endif %}
-          <img src="{{ item.image_url or url_for('static', filename='img/placeholders/product-placeholder.svg') }}" alt="{{ item.name }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
+          <img src="{{ product_image_url(item) }}" alt="{{ item.name }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
         </a>
         <div class="card-body">
           <span class="category-chip">{{ item.category_name }}</span>
@@ -164,26 +164,12 @@
       </div>
     </div>
     <div class="gallery-grid">
-      <figure class="gallery-item gallery-featured">
-        <img src="{{ url_for('static', filename='img/gallery/gallery-1.svg') }}" alt="Дом у леса" loading="lazy">
-        <figcaption>Дом у леса</figcaption>
+      {% for item in gallery_products %}
+      <figure class="gallery-item {% if loop.first %}gallery-featured{% endif %}">
+        <img src="{{ product_image_url(item) }}" alt="{{ item.name }}" loading="lazy">
+        <figcaption>{{ item.name }}</figcaption>
       </figure>
-      <figure class="gallery-item">
-        <img src="{{ url_for('static', filename='img/gallery/gallery-2.svg') }}" alt="Глэмпинг-модуль" loading="lazy">
-        <figcaption>Глэмпинг-модуль</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="{{ url_for('static', filename='img/gallery/gallery-3.svg') }}" alt="Семейный модуль" loading="lazy">
-        <figcaption>Семейный модуль</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="{{ url_for('static', filename='img/gallery/gallery-4.svg') }}" alt="Административный блок" loading="lazy">
-        <figcaption>Административный блок</figcaption>
-      </figure>
-      <figure class="gallery-item">
-        <img src="{{ url_for('static', filename='img/gallery/gallery-5.svg') }}" alt="Модуль у воды" loading="lazy">
-        <figcaption>Модуль у воды</figcaption>
-      </figure>
+      {% endfor %}
     </div>
   </div>
 </section>

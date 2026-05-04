@@ -6,7 +6,7 @@
   {% for item in products %}
   <article class="product-card">
     <div class="product-media">
-      <img src="{{ item.image_url or url_for('static', filename='img/placeholders/product-placeholder.svg') }}" alt="{{ item.name }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
+      <img src="{{ product_image_url(item) }}" alt="{{ item.name }}" loading="lazy" onerror="this.onerror=null;this.src='{{ url_for('static', filename='img/placeholders/product-placeholder.svg') }}';">
     </div>
     <div class="card-body">
       <h3>{{ item.name }}</h3>
